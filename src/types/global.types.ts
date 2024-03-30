@@ -9,3 +9,7 @@ export interface Message {
   username: string;
   text: string;
 }
+
+export interface User {
+  username: string;
+}

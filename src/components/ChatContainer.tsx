@@ -1,16 +1,27 @@
 import React, { useState } from 'react';
 import { Message } from '../types/global.types.ts';
+import { useUserContext } from '../contexts/UserContext.tsx';
+import Login from './Login.tsx';
 import ChatBox from './ChatBox.tsx';
 import InputText from './InputText.tsx';
 
 const ChatContainer = (): JSX.Element => {
-  const [chatLog, setChatLog] = useState<Message[]>([
-    { username: 'paul', text: 'hi' },
-  ]);
+  const { user } = useUserContext();
+  const [chatLog, setChatLog] = useState<Message[]>([]);
 
   const handleSend = (text: string): void => {
-    setChatLog((prevChatLog) => [...prevChatLog, { username: 'me', text }]);
+    setChatLog((prevChatLog) => [
+      ...prevChatLog,
+      { username: user.username, text },
+    ]);
   };
+
+  if (!user)
+    return (
+      <>
+        <Login></Login>
+      </>
+    );
 
   return (
     <>

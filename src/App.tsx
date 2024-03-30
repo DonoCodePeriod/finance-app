@@ -1,8 +1,13 @@
 import './App.css';
-import ChatContainer from './component/ChatContainer.tsx';
+import UserProvider from './contexts/UserContext.tsx';
+import ChatContainer from './components/ChatContainer.tsx';
 
 function App() {
-  return <ChatContainer></ChatContainer>;
+  return (
+    <UserProvider>
+      <ChatContainer></ChatContainer>
+    </UserProvider>
+  );
 }
 
 export default App;
