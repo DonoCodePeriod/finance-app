@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import { Message } from '../types/global.types.ts';
 import { useUserContext } from '../contexts/UserContext.tsx';
-import Login from './Login.tsx';
 import ChatBox from './ChatBox.tsx';
 import InputText from './InputText.tsx';
 
 const ChatContainer = (): JSX.Element => {
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
   const [chatLog, setChatLog] = useState<Message[]>([]);
 
   const handleSend = (text: string): void => {
@@ -16,16 +15,12 @@ const ChatContainer = (): JSX.Element => {
     ]);
   };
 
-  if (!user)
-    return (
-      <>
-        <Login></Login>
-      </>
-    );
-
   return (
     <>
       <div>ChatContainer</div>
+      <div>
+        <button onClick={logout}></button>
+      </div>
       <ChatBox chatLog={chatLog}></ChatBox>
       <InputText handleSend={handleSend}></InputText>
     </>

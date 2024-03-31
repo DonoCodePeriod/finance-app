@@ -1,20 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useUserContext } from '../contexts/UserContext.tsx';
 
-const Login = () => {
-  const { login } = useUserContext();
+const Login = (): JSX.Element => {
+  const { attemptLogin } = useUserContext();
+
+  const [username, setUsername] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+
   return (
-    <form>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        attemptLogin(username, password);
+      }}>
       <h1>Please log in</h1>
-      <input name='username' type='text'></input>
-      <input name='password' type='password'></input>
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          login(e.target.username, e.target.password);
-        }}>
-        Log In
-      </button>
+      <input
+        name='username'
+        type='text'
+        onChange={(e) => setUsername(e.target.value)}
+        value={username}></input>
+      <input
+        name='password'
+        type='password'
+        onChange={(e) => setPassword(e.target.value)}
+        value={password}></input>
+      <button>Log In</button>
     </form>
   );
 };

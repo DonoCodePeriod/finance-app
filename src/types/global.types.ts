@@ -11,5 +11,12 @@ export interface Message {
 }
 
 export interface User {
+  email: string;
   username: string;
+}
+
+export interface Data {
+  loading: boolean;
+  data: NonNullable<unknown> | null;
+  error: string;
 }
